@@ -45,8 +45,32 @@ class Router
 
     public function renderView($view, $params)
     {
+        $layoutContent = $this->layoutContent();
+        $viewContent = $this->viewContent($view, $params);
+        return str_replace("{{content}}", $viewContent, $layoutContent);
+    }
+
+    public function renderContent($content)
+    {
+        $layoutContent = $this->layoutContent();
+        return str_replace("{{content}}", $content, $layoutContent);
+    }
+
+    protected function viewContent($view, $params)
+    {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
         ob_start();
-        include_once Application::$ROUTE_DIR . "/views/$view.php";
+        include_once Application::$ROOT_DIR . "/views/$view.php";
+        return ob_get_clean();
+    }
+
+    protected function layoutContent()
+    {
+        $layout = Application::$app->controller->layout ?? "main";
+        ob_start();
+        include_once Application::$ROOT_DIR . "/views/layouts/$layout.php";
         return ob_get_clean();
     }
 }

@@ -9,7 +9,7 @@ class Application
 
   public Router $router;
   public Request $request;
-  public static string $ROUTE_DIR;
+  public static string $ROOT_DIR;
   public Response $response;
   public Controller $controller;
   public static Application $app;
@@ -17,7 +17,7 @@ class Application
   public function __construct($routePath)
   {
     self::$app = $this;
-    self::$ROUTE_DIR = $routePath;
+    self::$ROOT_DIR = $routePath;
     $this->request = new Request();
     $this->response = new Response();
     $this->router = new Router($this->request, $this->response);
