@@ -10,6 +10,13 @@ $config = [
         'dsn' => $_ENV['DB_DNS'],
         'user' => $_ENV['DB_USER'],
         'password' => $_ENV['DB_PASSWORD'],
+    ],
+    'mailer' => [
+        'host' => $_ENV['MAIL_SERVER_HOST'],
+        'port' => $_ENV['MAIL_SERVER_PORT'],
+        'user' => $_ENV['MAIL_SERVER_USERNAME'],
+        'send_from' => $_ENV['MAIL_SEND_FROM'],
+        'password' => $_ENV['MAIL_SERVER_PASSWORD']
     ]
 ];
 

@@ -2,6 +2,7 @@
 
 namespace App\src;
 
+use App\models\User;
 use App\models\DataBase;
 use App\controllers\Controller;
 
@@ -9,13 +10,15 @@ class Application
 {
 
   public Router $router;
+
   public Request $request;
   public static string $ROOT_DIR;
   public DataBase $db;
   public Response $response;
   public Session $session;
   public Mailer $mailer;
-  public Controller $controller;
+  public Controller|null $controller = null;
+  public User|null $user;
   public static Application $app;
 
   public function __construct($routePath, $config)
@@ -30,7 +33,7 @@ class Application
     $this->mailer = new Mailer($config['mailer']);
   }
 
-  public function getController(): Controller
+  public function getController(): Controller|null
   {
     return $this->controller;
   }
@@ -43,6 +46,21 @@ class Application
   public function run()
   {
     echo $this->router->resolve();
+  }
+
+  public function login(User $user)
+  {
+    $this->user = $user;
+    $userInfos = (array) $this->user;
+    unset($userInfos['password']);
+    unset($userInfos['errors']);
+    $this->session->set('user', $userInfos);
+  }
+
+  public function logout()
+  {
+    $this->session->remove('user');
+    $this->user = null;
   }
 }
 

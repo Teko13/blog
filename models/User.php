@@ -12,6 +12,7 @@ class User extends DBModel
 
     public string $firstName;
     public string $lastName;
+    public int $id;
     public string $email;
     public string $password;
     public int $type = self::STATUS_INVALIDE;
@@ -19,6 +20,11 @@ class User extends DBModel
     public function attributes(): array
     {
         return ['first_name', 'last_name', 'email', 'password', 'type'];
+    }
+
+    public function primaryKey(): string
+    {
+        return "id";
     }
 
     public function register()

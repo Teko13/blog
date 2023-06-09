@@ -3,19 +3,33 @@
 namespace App\controllers;
 
 use App\models\User;
-use App\src\Application;
 use App\src\Request;
+use App\models\Login;
+use App\src\Application;
 
 class AuthController extends Controller
 {
 
+    public string $layout;
+
     public function login(Request $request)
     {
+        $loginUser = new Login();
         if ($request->isPostMethod()) {
-            var_dump($request->getBody());
-            exit;
+            $loginUser->loadData($request->getBody());
+            if ($loginUser->validate() && $loginUser->login()) {
+                Application::$app->response->redirect('/');
+                return;
+            }
         }
-        return $this->render("login", []);
+        return $this->render("login", ['model' => $loginUser]);
+    }
+
+    public function logout()
+    {
+        Application::$app->logout();
+        return Application::$app->response->redirect('/');
+
     }
 
     public function signup(Request $request)

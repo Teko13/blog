@@ -40,4 +40,19 @@ class Session
         }
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
+
+    public function set($name, $data)
+    {
+        $_SESSION[$name] = $data;
+    }
+
+    public function get($name)
+    {
+        return $_SESSION[$name];
+    }
+
+    public function remove($name)
+    {
+        unset($_SESSION[$name]);
+    }
 }

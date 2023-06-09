@@ -135,10 +135,14 @@ header.head-container {
     margin: .6rem;
 }
 
+.nav__links {
+    display: flex;
+}
+
 .nav__list {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav__toggle {
@@ -147,6 +151,26 @@ header.head-container {
 
 .nav__list li a {
     color: white;
+}
+.user-blaz {
+    margin-left: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border: 1px solid var(--color-primary-variant);
+    padding: 2px;
+    border-radius: 3rem;
+}
+.user-initial {
+    padding: .4rem;
+    border-radius: 3rem;
+    background: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-bg);
+}
+.user-firstName {
+    padding-right: .6rem;
 }
 .abs {
     position: fixed;

@@ -26,6 +26,7 @@ use App\src\Application;
                     <li><a href="/signup"><span class="head-text">Créer un post</span></a></li>
                     <li><a href="/signup"><span class="head-text">Gerer posts</span></a></li>
                     <li><a href="/logout"><span class="head-text">Déconnexion</span></a></li>
+                    <li><a href="#"><span class="head-text">Validation</span></a></li>
                 </ul>
                 <div class="user-blaz">
                     <span class="user-initial">

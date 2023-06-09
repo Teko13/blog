@@ -1,6 +1,8 @@
 <?php
 namespace App\models;
 
+use App\src\Application;
+
 class DataBase
 {
 

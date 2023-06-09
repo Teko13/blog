@@ -1,6 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
 use App\controllers\AuthController;
+use App\models\User;
 use App\src\Application;
 use App\controllers\SiteController;
 
@@ -18,7 +19,7 @@ $config = [
         'user' => $_ENV['MAIL_SERVER_USERNAME'],
         'send_from' => $_ENV['MAIL_SEND_FROM'],
         'password' => $_ENV['MAIL_SERVER_PASSWORD']
-    ]
+    ],
 ];
 
 $app = new Application(dirname(__DIR__), $config);
@@ -27,6 +28,7 @@ $app->router->get("/posts", 'posts');
 $app->router->post("/signup", [AuthController::class, "signup"]);
 $app->router->get("/login", [AuthController::class, "login"]);
 $app->router->get("/signup", [AuthController::class, "signup"]);
+$app->router->get("/logout", [AuthController::class, "logout"]);
 $app->router->post("/login", [AuthController::class, "login"]);
 $app->router->post("/contact", [SiteController::class, "handlerContact"]);
 $app->run();

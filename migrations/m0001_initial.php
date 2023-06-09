@@ -9,8 +9,8 @@ class m0001_initial
         $db = Application::$app->db;
         $sql = "CREATE TABLE user (
             id INT NOT NULL AUTO_INCREMENT,
-            first_name VARCHAR(255) NOT NULL,
-            last_name VARCHAR(255) NOT NULL,
+            firstName VARCHAR(255) NOT NULL,
+            lastName VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
             password VARCHAR(255) NOT NULL,
             type INT NOT NULL DEFAULT 0,

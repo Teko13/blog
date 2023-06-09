@@ -16,7 +16,7 @@ abstract class DBModel extends Model
 
         $tableName = $this->tableName();
         $attributes = $this->attributes();
-        $query = self::prepare("INSERT INTO $tableName (first_name, last_name, email, password, type) VALUES (:first_name, :last_name, :email, :password, :type)");
+        $query = self::prepare("INSERT INTO $tableName (firstName, lastName, email, password, type) VALUES (:first_name, :last_name, :email, :password, :type)");
         $values = [
             ":first_name" => $this->firstName,
             ":last_name" => $this->lastName,
@@ -27,6 +27,7 @@ abstract class DBModel extends Model
         $query->execute($values);
         return true;
     }
+
 
     public static function prepare($sql)
     {
@@ -39,5 +40,15 @@ abstract class DBModel extends Model
         $query->execute();
         $response = $query->fetch();
         return $response === false;
+    }
+
+    public function findOne(array $where)
+    {
+        $tableName = static::tableName();
+        $attribut = key($where);
+        $query = self::prepare("SELECT * FROM $tableName WHERE $attribut = :value");
+        $query->bindValue(':value', $where[$attribut]);
+        $query->execute();
+        return $query->fetchObject(User::class);
     }
 }
