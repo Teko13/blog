@@ -37,8 +37,8 @@ class Router
             return $this->renderView($action, []);
         }
         if (is_array($action)) {
-            Application::$app->controller = new $action[0]();
-            $action[0] = Application::$app->controller;
+            Application::$app->setController(new $action[0]());
+            $action[0] = Application::$app->getController();
         }
         return call_user_func($action, $this->request);
     }
@@ -68,7 +68,7 @@ class Router
 
     protected function layoutContent()
     {
-        $layout = Application::$app->controller->layout ?? "main";
+        $layout = Application::$app->getController()->layout ?? "main";
         ob_start();
         include_once Application::$ROOT_DIR . "/views/layouts/$layout.php";
         return ob_get_clean();

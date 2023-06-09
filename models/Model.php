@@ -50,6 +50,10 @@ abstract class Model
         }
         return empty($this->errors);
     }
+    public function addBasicError(string $attr, string $message)
+    {
+        $this->errors[$attr] = $message;
+    }
     public function addError($attribute, $ruleName, $params)
     {
         $message = $this->errorsMsg()[$ruleName] ?? "";
