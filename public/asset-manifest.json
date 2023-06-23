@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a3447e48.css",
+    "main.js": "/static/js/main.6fa71e46.js",
+    "static/media/portfolio3.png": "/static/media/portfolio3.6b2cd18d0b4d7fdaf245.png",
+    "static/media/portfolio2.png": "/static/media/portfolio2.82d7f20305c9b0b790f3.png",
+    "static/media/moi-sans-font.png": "/static/media/moi-sans-font.77d24b631d81e4b0951a.png",
+    "static/media/portfolio4.png": "/static/media/portfolio4.8a774f7bc9620e73afe8.png",
+    "static/media/portfolio1.png": "/static/media/portfolio1.7dce5f2542ffcfea9ce4.png",
+    "static/media/portfolio7.png": "/static/media/portfolio7.d768bafce5f28e282ed0.png",
+    "static/media/moi-font-bleu.jpg": "/static/media/moi-font-bleu.1fec0da94b641e6dbc71.jpg",
+    "static/media/portfolio6.png": "/static/media/portfolio6.66f10408a6b93824cf16.png",
+    "static/media/cv.pdf": "/static/media/cv.a8dd2a4c0dc708ae8d08.pdf",
+    "static/media/logo_fond.png": "/static/media/logo_fond.4d1eb44b62cc1b11025e.png",
+    "static/media/portfolio8.png": "/static/media/portfolio8.a04066468491d5d8e71b.png",
+    "static/media/portfolio5.png": "/static/media/portfolio5.329b480b5c868babfc84.png",
+    "static/media/mon-logo.svg": "/static/media/mon-logo.e48611fde6d451182c6ec9ea3f2ef5b1.svg",
+    "index.html": "/index.html",
+    "main.a3447e48.css.map": "/static/css/main.a3447e48.css.map",
+    "main.6fa71e46.js.map": "/static/js/main.6fa71e46.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3447e48.css",
+    "static/js/main.6fa71e46.js"
+  ]
+}

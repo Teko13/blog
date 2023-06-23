@@ -17,15 +17,22 @@ class User extends DBModel
     public string $password;
     public int $type = self::STATUS_INVALIDE;
 
-    public function attributes(): array
-    {
-        return ['first_name', 'last_name', 'email', 'password', 'type'];
-    }
 
-    public function primaryKey(): string
-    {
-        return "id";
-    }
+    // public function save(): bool
+    // {
+
+    //     $tableName = $this->tableName();
+    //     $query = self::prepare("INSERT INTO $tableName (firstName, lastName, email, password, type) VALUES (:first_name, :last_name, :email, :password, :type)");
+    //     $values = [
+    //         ":first_name" => $this->firstName,
+    //         ":last_name" => $this->lastName,
+    //         ":email" => $this->email,
+    //         ":password" => $this->password,
+    //         ':type' => $this->type
+    //     ];
+    //     $query->execute($values);
+    //     return true;
+    // }
 
     public function register()
     {
@@ -38,12 +45,16 @@ class User extends DBModel
     {
         return "user";
     }
+    public function attributes()
+    {
+        return ["firstName", "lastName", "email", "password", "type"];
+    }
     public function rules(): array
     {
         return [
             'firstName' => [self::RULE_REQUIRED],
             'lastName' => [self::RULE_REQUIRED],
-            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULES_UNIQUE, 'is_unique' => $this->unique('user', 'email', $this->email)]],
+            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULES_UNIQUE, 'is_unique' => $this->unique(['email' => $this->email])]],
             'password' => [self::RULE_REQUIRED, [self::RULE_MIN, "min" => 8], [self::RULE_MAX, 'max' => 24]],
         ];
     }

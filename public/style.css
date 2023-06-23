@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+
 
 * {
     margin: 0;
@@ -22,6 +24,26 @@
     --container-width-md:86%;
     --container-width-sm:90%;
     --transition: all 400ms ease;
+}
+
+.msg {
+    font-size: .8rem;
+    font-style: italic;
+}
+.succes {
+    color: green;
+}
+.error {
+    color: red;
+}
+button {
+    background-color: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
 }
 
 html {
@@ -627,3 +649,93 @@ section.auth input {
     color: red;
 }
 
+/*==================posts list section stye ====================*/
+
+.post-container {
+    margin: 3rem 0;
+    border: 1px solid var(--color-primary-variant);
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: all 500ms ease;
+    background-color: transparent;
+    position: relative;
+}
+.post-container:hover {
+    background-color: var(--color-bg-variant);
+    border-style: none;
+}
+.date {
+    position: absolute;
+    right: 2rem;
+    top: -15px;
+    width: fit-content;
+    padding: 0 1rem;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-primary-variant);
+    border-radius: 1rem;
+}
+.post-container h2 {
+    margin: 0;
+}
+.chapo {
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+}
+
+/*==================one post section stye ====================*/
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2.5rem 1rem;
+}
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+}
+.comment-header h3 {
+    color: var(--color-primary);
+}
+.comment-form {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--color-primary-variant);
+    padding-bottom: 1rem;
+}
+.comment-form button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+}
+.btn[disabled] {
+    background: var(--color-light);
+    opacity: 0.6;
+}
+.btn[disabled]:hover {
+    background: var(--color-light);
+    opacity: 0.6;
+}
+.unauthorization-msg {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: red;
+    font-size: .8rem;
+}
+.post-container.details .author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.post-container.details h1 {
+    color: var(--color-primary);
+}
+.post-container.details:hover {
+    background: transparent;
+}

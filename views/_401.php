@@ -1,8 +1,8 @@
 <section>
     <div class="container">
-        <h1>404</h1>
+        <h1>401</h1>
         <p>
-            La page n'a pas été trouvé
+            Accè non autorisé
         </p>
     </div>
 </section>

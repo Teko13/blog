@@ -1,16 +1,29 @@
 <?php
+use App\models\User;
 use App\src\Application;
+
+$userSession = Application::$app->session->get('user');
+
+$isValid = $userSession["type"] > User::STATUS_INVALIDE ? true : false;
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href=<?= "./style.css"; ?>>
+    <title>Mon Blog</title>
 </head>
 
 <body>
@@ -22,20 +35,19 @@ use App\src\Application;
             <div class="nav__links">
                 <ul class="nav__list">
                     <li><a href="/"><span class='head-text'>Accueil</span></a></li>
-                    <li><a href="/login"><span class="head-text">Posts</span></a></li>
-                    <li><a href="/signup"><span class="head-text">Créer un post</span></a></li>
-                    <li><a href="/signup"><span class="head-text">Gerer posts</span></a></li>
+                    <li><a href="/posts"><span class="head-text">Posts</span></a></li>
                     <li><a href="/logout"><span class="head-text">Déconnexion</span></a></li>
                 </ul>
-                <div class="user-blaz">
+                <button <?= !$isValid ? "title='Vous pouvez accéder à l&#39;espace administration quand votre compte sera validé'" : "title='accéder à l&#39;espace administration'" ?>
+                    onclick='window.location.href="/admin"' class="user-blaz" <?= !$isValid ? "disabled" : "" ?>>
                     <span class="user-initial">
-                        <?= strtoupper(substr($_SESSION['user']['firstName'], 0, 1)); ?>
-                        <?= strtoupper(substr($_SESSION['user']['lastName'], 0, 1)); ?>
+                        <?= strtoupper(substr($userSession['firstName'], 0, 1)); ?>
+                        <?= strtoupper(substr($userSession['lastName'], 0, 1)); ?>
                     </span>
                     <span class="user-firstName">
-                        <?= ucfirst($_SESSION['user']['firstName']); ?>
+                        <?= ucfirst($userSession['firstName']); ?>
                     </span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>

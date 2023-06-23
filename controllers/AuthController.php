@@ -10,7 +10,6 @@ use App\src\Application;
 class AuthController extends Controller
 {
 
-    public string $layout;
 
     public function login(Request $request)
     {
