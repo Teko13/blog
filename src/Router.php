@@ -2,6 +2,8 @@
 
 namespace App\src;
 
+use App\src\Application;
+
 class Router
 {
     protected array $routes = [];
@@ -14,17 +16,17 @@ class Router
         $this->response = $response;
     }
 
-    public function post($path, $action)
+    public function post($path, $action): void
     {
         $this->routes["post"][$path] = $action;
     }
 
-    public function get($path, $action)
+    public function get($path, $action): void
     {
         $this->routes["get"][$path] = $action;
     }
 
-    public function resolve()
+    public function resolve(): string
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
@@ -43,20 +45,15 @@ class Router
         return call_user_func($action, $this->request);
     }
 
-    public function renderView($view, $params)
+    public function renderView($view, $params): string
     {
         $layoutContent = $this->layoutContent();
         $viewContent = $this->viewContent($view, $params);
         return str_replace("{{content}}", $viewContent, $layoutContent);
     }
 
-    public function renderContent($content)
-    {
-        $layoutContent = $this->layoutContent();
-        return str_replace("{{content}}", $content, $layoutContent);
-    }
 
-    protected function viewContent($view, $params)
+    protected function viewContent($view, $params): string
     {
         foreach ($params as $key => $value) {
             $$key = $value;
@@ -66,9 +63,9 @@ class Router
         return ob_get_clean();
     }
 
-    protected function layoutContent()
+    protected function layoutContent(): string
     {
-        $layout = Application::$app->getController()->layout ?? "main";
+        $layout = $layout = Application::$app->layout;
         ob_start();
         include_once Application::$ROOT_DIR . "/views/layouts/$layout.php";
         return ob_get_clean();

@@ -1,10 +1,19 @@
 <section>
     <div class="container">
-        <div>
-            <h2>Post 2</h2>
-        </div>
-        <div>
-            <h2>Post 2</h2>
-        </div>
+        <?php
+        foreach ($posts as $post) { ?>
+            <div class="post-container">
+                <div class="date">
+                    <?= $post->updated_at; ?>
+                </div>
+                <h2>
+                    <?= $post->title; ?>
+                </h2>
+                <div class="chapo">
+                    <?= $post->chapo; ?>
+                </div>
+                <a href=<?= "/post?id=" . $post->id; ?> class="btn btn-primary">Voir le post</a>
+            </div>
+        <?php } ?>
     </div>
 </section>

@@ -48,23 +48,32 @@ class Mailer
         $this->mailer->isHTML(true); //Set email format to HTML
     }
 
-    public function sendvalidationrequest(array $userInfos)
+    public function sendvalidationrequest(array $userInfos): bool
     {
         $template = self::getusermailtemplate();
         $templatefield = array("{{firstname}}", "{{lastname}}", "{{email}}");
         $this->mailer->Subject = 'INSCRIPTION NOUVEAU UTILISATEUR';
         $email = str_replace($templatefield, $userInfos, $template);
         $this->mailer->Body = $email;
+        return $this->mailer->send();
+    }
+    public function sendCommentValidationrequest(array $comment)
+    {
+        $template = self::getcommentmailtemplate();
+        $templatefield = array("{{author}}", "{{post}}", "{{comment}}");
+        $this->mailer->Subject = 'NOUVEAU COMMENTAIRE';
+        $email = str_replace($templatefield, $comment, $template);
+        $this->mailer->Body = $email;
         $this->mailer->send();
     }
 
-    private function getusermailtemplate()
+    private function getusermailtemplate(): string
     {
         ob_start();
         include_once Application::$ROOT_DIR . "/views/templates/" . self::NEW_USER_MAIL_TEMPLATE . ".php";
         return ob_get_clean();
     }
-    private function getcommentmailtemplate()
+    private function getcommentmailtemplate(): string
     {
         ob_start();
         include_once Application::$ROOT_DIR . "/views/templates/" . self::NEW_COMMENT_MAIL_TEMPLATE . ".php";

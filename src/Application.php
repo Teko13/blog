@@ -3,6 +3,7 @@
 namespace App\src;
 
 use App\models\User;
+use App\models\Login;
 use App\models\DataBase;
 use App\controllers\Controller;
 
@@ -17,8 +18,9 @@ class Application
   public Response $response;
   public Session $session;
   public Mailer $mailer;
+  public string $layout;
   public Controller|null $controller = null;
-  public User|null $user;
+  public Login|null $user;
   public static Application $app;
 
   public function __construct($routePath, $config)
@@ -31,6 +33,31 @@ class Application
     $this->router = new Router($this->request, $this->response);
     $this->session = new Session();
     $this->mailer = new Mailer($config['mailer']);
+    $this->setLayout();
+  }
+
+  public function setLayout(): void
+  {
+    $userSession = $this->session->get('user') ?? false;
+    if ($userSession) {
+      switch ($userSession['type']) {
+        case User::STATUS_VALIDE:
+          $this->layout = "auth";
+          break;
+        case User::STATUS_INVALIDE:
+          $this->layout = 'auth';
+          break;
+        case User::STATUS_ADMIN:
+          $this->layout = 'auth';
+          break;
+
+        default:
+          $this->layout = 'main';
+          break;
+      }
+    } else {
+      $this->layout = 'main';
+    }
   }
 
   public function getController(): Controller|null
@@ -38,17 +65,17 @@ class Application
     return $this->controller;
   }
 
-  public function setController(Controller $controller)
+  public function setController(Controller $controller): void
   {
     $this->controller = $controller;
   }
 
-  public function run()
+  public function run(): void
   {
     echo $this->router->resolve();
   }
 
-  public function login(User $user)
+  public function login(Login $user): void
   {
     $this->user = $user;
     $userInfos = (array) $this->user;
@@ -57,7 +84,7 @@ class Application
     $this->session->set('user', $userInfos);
   }
 
-  public function logout()
+  public function logout(): void
   {
     $this->session->remove('user');
     $this->user = null;

@@ -1,6 +1,8 @@
 <?php
 require_once '../vendor/autoload.php';
+use App\controllers\AdminController;
 use App\controllers\AuthController;
+use App\controllers\PostsController;
 use App\models\User;
 use App\src\Application;
 use App\controllers\SiteController;
@@ -24,13 +26,16 @@ $config = [
 
 $app = new Application(dirname(__DIR__), $config);
 $app->router->get("/", [SiteController::class, "home"]);
-$app->router->get("/posts", 'posts');
+$app->router->get("/posts", [PostsController::class, 'posts']);
+$app->router->get("/post", [PostsController::class, 'post']);
 $app->router->post("/signup", [AuthController::class, "signup"]);
 $app->router->get("/login", [AuthController::class, "login"]);
 $app->router->get("/signup", [AuthController::class, "signup"]);
 $app->router->get("/logout", [AuthController::class, "logout"]);
 $app->router->post("/login", [AuthController::class, "login"]);
 $app->router->post("/contact", [SiteController::class, "handlerContact"]);
+$app->router->get("/admin", [AdminController::class, "adminDashbord"]);
+$app->router->post("/comment", [PostsController::class, "submitComment"]);
 $app->run();
 
 

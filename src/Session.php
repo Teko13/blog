@@ -10,48 +10,50 @@ class Session
     public function __construct()
     {
         session_start();
-        $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
+        $flashMessages = $this->get(self::FLASH_KEY) ?? [];
         foreach ($flashMessages as $key => &$flashMessage) {
             $flashMessage['remove'] = true;
         }
-        $_SESSION[self::FLASH_KEY] = $flashMessages;
+        $this->set(self::FLASH_KEY, $flashMessages);
     }
 
-    public function setFlash($key, $message)
+    public function setFlash($key, $message): void
     {
-        $_SESSION[self::FLASH_KEY][$key] = [
-            'remove' => false,
-            'message' => $message
-        ];
+        $this->set(self::FLASH_KEY, [
+            $key => [
+                'remove' => false,
+                'message' => $message
+            ]
+        ]);
     }
 
-    public function getFlash($key)
+    public function getFlash($key): array|null|string
     {
-        return $_SESSION[self::FLASH_KEY][$key]['message'] ?? null;
+        return $this->get(self::FLASH_KEY)[$key]['message'] ?? null;
     }
 
     public function __destruct()
     {
-        $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
+        $flashMessages = $this->get(self::FLASH_KEY) ?? [];
         foreach ($flashMessages as $key => &$flashMessage) {
             if ($flashMessage['remove']) {
                 unset($flashMessages[$key]);
             }
         }
-        $_SESSION[self::FLASH_KEY] = $flashMessages;
+        $this->set(self::FLASH_KEY, $flashMessages);
     }
 
-    public function set($name, $data)
+    public function set($name, $data): void
     {
         $_SESSION[$name] = $data;
     }
 
-    public function get($name)
+    public function get($name): array|null
     {
-        return $_SESSION[$name];
+        return $_SESSION[$name] ?? null;
     }
 
-    public function remove($name)
+    public function remove($name): void
     {
         unset($_SESSION[$name]);
     }

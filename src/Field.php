@@ -30,12 +30,12 @@ class Field
             $this->type, $this->attribute, $this->placeholder
         );
     }
-    public function typePassword()
+    public function typePassword(): Field
     {
         $this->type = self::TYPE_PASSWORD;
         return $this;
     }
-    public function typeEmail()
+    public function typeEmail(): Field
     {
         $this->type = self::TYPE_EMAIL;
         return $this;

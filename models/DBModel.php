@@ -9,36 +9,16 @@ abstract class DBModel extends Model
 {
 
     abstract public function tableName(): string;
-    abstract public function attributes(): array;
 
-    public function save()
-    {
-
-        $tableName = $this->tableName();
-        $attributes = $this->attributes();
-        $query = self::prepare("INSERT INTO $tableName (firstName, lastName, email, password, type) VALUES (:first_name, :last_name, :email, :password, :type)");
-        $values = [
-            ":first_name" => $this->firstName,
-            ":last_name" => $this->lastName,
-            ":email" => $this->email,
-            ":password" => $this->password,
-            ':type' => $this->type
-        ];
-        $query->execute($values);
-        return true;
-    }
 
 
     public static function prepare($sql)
     {
         return Application::$app->db->pdo->prepare($sql);
     }
-    public function unique($tableName, $column, $value)
+    public function unique(array $instance)
     {
-        $query = self::prepare("SELECT * FROM $tableName WHERE $column = :attr");
-        $query->bindValue(':attr', $value);
-        $query->execute();
-        $response = $query->fetch();
+        $response = $this->findOne($instance);
         return $response === false;
     }
 
@@ -49,6 +29,40 @@ abstract class DBModel extends Model
         $query = self::prepare("SELECT * FROM $tableName WHERE $attribut = :value");
         $query->bindValue(':value', $where[$attribut]);
         $query->execute();
-        return $query->fetchObject(User::class);
+        return $query->fetchObject(static::class);
+    }
+    public function findAll()
+    {
+        $tableName = $this->tableName();
+        $entitys = [];
+        $query = $this->prepare("SELECT * FROM $tableName");
+        $query->execute();
+        while ($entity = $query->fetchObject(static::class)) {
+            $entitys[] = $entity;
+        }
+        return $entitys;
+    }
+    public function findInMultiTable(string $sql, array $params)
+    {
+        $query = $this->prepare($sql);
+        $query->execute($params);
+        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function save()
+    {
+        $table = $this->tableName();
+        $attributes = $this->attributes();
+        $placeholder = array_map(function ($attribute) {
+            return ":$attribute";
+        }, $attributes);
+        $placeholder = implode(',', $placeholder);
+        $fields = implode(',', $attributes);
+        $sql = "INSERT INTO $table ($fields) VALUES ($placeholder)";
+        $query = $this->prepare($sql);
+        foreach ($attributes as $attribute) {
+            $query->bindValue(":$attribute", $this->$attribute);
+        }
+        return $query->execute();
     }
 }
