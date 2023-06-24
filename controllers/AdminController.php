@@ -20,7 +20,6 @@ class AdminController extends Controller
                 return true;
             } else {
                 Application::$app->response->setStatusCode(401);
-                //return $this->render('_401', []);
                 return false;
             }
         } else {

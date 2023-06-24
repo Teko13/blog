@@ -23,7 +23,7 @@ class Application
   public Login|null $user;
   public static Application $app;
 
-  public function __construct($routePath, $config)
+  public function __construct(string $routePath, array $config)
   {
     self::$app = $this;
     self::$ROOT_DIR = $routePath;

@@ -16,12 +16,12 @@ class Router
         $this->response = $response;
     }
 
-    public function post($path, $action): void
+    public function post(string $path, array|string $action): void
     {
         $this->routes["post"][$path] = $action;
     }
 
-    public function get($path, $action): void
+    public function get(string $path, array|string $action): void
     {
         $this->routes["get"][$path] = $action;
     }
@@ -31,7 +31,7 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $action = $this->routes[$method][$path] ?? false;
-        if ($action == false) {
+        if ($action === false) {
             $this->response->setStatusCode(404);
             return $this->renderView("_404", []);
         }
@@ -45,7 +45,7 @@ class Router
         return call_user_func($action, $this->request);
     }
 
-    public function renderView($view, $params): string
+    public function renderView(string $view, array $params): string
     {
         $layoutContent = $this->layoutContent();
         $viewContent = $this->viewContent($view, $params);
@@ -53,7 +53,7 @@ class Router
     }
 
 
-    protected function viewContent($view, $params): string
+    protected function viewContent(string $view, array $params): string
     {
         foreach ($params as $key => $value) {
             $$key = $value;
@@ -71,7 +71,3 @@ class Router
         return ob_get_clean();
     }
 }
-
-
-
-?>

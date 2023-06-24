@@ -57,14 +57,14 @@ class Mailer
         $this->mailer->Body = $email;
         return $this->mailer->send();
     }
-    public function sendCommentValidationrequest(array $comment)
+    public function sendCommentValidationrequest(array $comment): bool
     {
         $template = self::getcommentmailtemplate();
         $templatefield = array("{{author}}", "{{post}}", "{{comment}}");
         $this->mailer->Subject = 'NOUVEAU COMMENTAIRE';
         $email = str_replace($templatefield, $comment, $template);
         $this->mailer->Body = $email;
-        $this->mailer->send();
+        return $this->mailer->send();
     }
 
     private function getusermailtemplate(): string
