@@ -15,7 +15,7 @@ class Field
     private const TYPE_PASSWORD = 'password';
     private const TYPE_EMAIL = 'email';
 
-    public function __construct($model, $attribute, $placeholder)
+    public function __construct(Model $model, string $attribute, string $placeholder)
     {
         $this->model = $model;
         $this->attribute = $attribute;

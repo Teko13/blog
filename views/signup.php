@@ -7,7 +7,7 @@
                 foreach ($model->errors as $field => $error) { ?>
                     <li>
                         <i>
-                            <?= $field ?>:
+                            <?= $field ?>:Ò
                             <?= $error ?>
                         </i>
                     </li>

@@ -17,17 +17,15 @@ class Session
         $this->set(self::FLASH_KEY, $flashMessages);
     }
 
-    public function setFlash($key, $message): void
+    public function setFlash(string $key, array|string $message): void
     {
-        $this->set(self::FLASH_KEY, [
-            $key => [
-                'remove' => false,
-                'message' => $message
-            ]
-        ]);
+        $_SESSION[self::FLASH_KEY][$key] = [
+            'remove' => false,
+            'message' => $message
+        ];
     }
 
-    public function getFlash($key): array|null|string
+    public function getFlash(string $key): array|null|string
     {
         return $this->get(self::FLASH_KEY)[$key]['message'] ?? null;
     }
@@ -43,17 +41,17 @@ class Session
         $this->set(self::FLASH_KEY, $flashMessages);
     }
 
-    public function set($name, $data): void
+    public function set(string|array $name, array|string $data): void
     {
         $_SESSION[$name] = $data;
     }
 
-    public function get($name): array|null
+    public function get(string|null $name): array|null
     {
         return $_SESSION[$name] ?? null;
     }
 
-    public function remove($name): void
+    public function remove(string $name): void
     {
         unset($_SESSION[$name]);
     }

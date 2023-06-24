@@ -2,6 +2,8 @@
 
 namespace App\controllers;
 
+use App\src\Request;
+
 
 
 class SiteController extends Controller
@@ -19,7 +21,6 @@ class SiteController extends Controller
 
     public function handlerContact(Request $request)
     {
-        //$dataParams = $request->getBody();
         return $this->render('contact', []);
     }
 }

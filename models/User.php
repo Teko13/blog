@@ -18,21 +18,6 @@ class User extends DBModel
     public int $type = self::STATUS_INVALIDE;
 
 
-    // public function save(): bool
-    // {
-
-    //     $tableName = $this->tableName();
-    //     $query = self::prepare("INSERT INTO $tableName (firstName, lastName, email, password, type) VALUES (:first_name, :last_name, :email, :password, :type)");
-    //     $values = [
-    //         ":first_name" => $this->firstName,
-    //         ":last_name" => $this->lastName,
-    //         ":email" => $this->email,
-    //         ":password" => $this->password,
-    //         ':type' => $this->type
-    //     ];
-    //     $query->execute($values);
-    //     return true;
-    // }
 
     public function register()
     {

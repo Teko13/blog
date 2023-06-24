@@ -4,7 +4,7 @@ use App\src\Application;
 class m0003_comment
 {
 
-    public function up()
+    public function up(): void
     {
         $db = Application::$app->db;
         $sql = "CREATE TABLE comment (
@@ -21,7 +21,7 @@ class m0003_comment
         $db->pdo->exec($sql);
     }
 
-    public function down()
+    public function down(): void
     {
         $db = Application::$app->db;
         $sql = "DROP TABLE comment";

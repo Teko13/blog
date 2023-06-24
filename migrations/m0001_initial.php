@@ -4,7 +4,7 @@ use App\src\Application;
 class m0001_initial
 {
 
-    public function up()
+    public function up(): void
     {
         $db = Application::$app->db;
         $sql = "CREATE TABLE user (
@@ -19,7 +19,7 @@ class m0001_initial
         $db->pdo->exec($sql);
     }
 
-    public function down()
+    public function down(): void
     {
         $db = Application::$app->db;
         $sql = "DROP TABLE user";
