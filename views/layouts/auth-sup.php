@@ -1,9 +1,3 @@
-<?php
-use App\src\Application;
-
-$userSession = Application::$app->session->get('user');
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,25 +12,25 @@ $userSession = Application::$app->session->get('user');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href=<?= "/style.css"; ?>>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Mon Blog</title>
 </head>
 
 <body>
     <header class='container head-container'>
         <nav class='head__nav'>
-            <a href="/">
+            <a href="#">
                 <h2>Teko</h2>
             </a>
             <div class="nav__links">
                 <ul class="nav__list">
-                    <li><a href="/admin"><span class='head-text'>Tableau de bord</span></a></li>
-                    <li><a href="#"><span class="head-text">Créer un post</span></a></li>
-                    <li><a href="#"><span class="head-text">Gerer posts</span></a></li>
+                    <li><a href="/"><span class='head-text'>Accueil</span></a></li>
+                    <li><a href="/posts"><span class="head-text">Posts</span></a></li>
                     <li><a href="/logout"><span class="head-text">Déconnexion</span></a></li>
-                    <li><a href="#"><span class="head-text">Validation</span></a></li>
                 </ul>
-                <div class="user-blaz">
+                <button <?= !$isValid ? "title='Vous pouvez accéder à l&#39;espace administration quand votre compte sera validé'" : "title='accéder à l&#39;espace administration'" ?>
+                    onclick='window.location.href="/admin"' class="user-blaz" <?= !$isValid ? "disabled" : "" ?>>
                     <span class="user-initial">
                         <?= strtoupper(substr($userSession['firstName'], 0, 1)); ?>
                         <?= strtoupper(substr($userSession['lastName'], 0, 1)); ?>
@@ -44,7 +38,7 @@ $userSession = Application::$app->session->get('user');
                     <span class="user-firstName">
                         <?= ucfirst($userSession['firstName']); ?>
                     </span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -61,16 +55,17 @@ $userSession = Application::$app->session->get('user');
         </ul>
         <div class="footer__socials">
             <a href="https://www.facebook.com/Parlons-Techs-104050835687569/" target='_blank'>
-                <FaFacebookF />
+                <i class="fa-brands fa-facebook-f"></i>
             </a>
             <a href="https://www.instagram.com/tekofabricefolly/" target='_blank'>
-                <FiInstagram />
+                <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://twitter.com/TekoFabriceF" target='_blank'>
-                <IoLogoTwitter />
+                <i class="fa-brands fa-twitter"></i>
             </a>
         </div>
     </footer>
+    <script src="/script.js"></script>
 </body>
 
 

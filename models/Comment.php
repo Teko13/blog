@@ -20,7 +20,7 @@ class Comment extends DBModel
     }
     public function attributes()
     {
-        return ["content", "id_post", "id_author"];
+        return ["content", "id_post", "id_author", "status"];
     }
     public function rules(): array
     {
@@ -36,5 +36,11 @@ class Comment extends DBModel
                 WHERE comment.id_post = :post_id";
         $params = [":post_id" => $idPost];
         return $this->findInMultiTable($sql, $params);
+    }
+    public function findAllComments()
+    {
+        $sql = "SELECT comment.*, user.email AS user_email, post.title AS post_title FROM comment
+                INNER JOIN user ON comment.id_author = user.id INNER JOIN post ON comment.id_post = post.id";
+        return $this->findInMultiTable($sql);
     }
 }

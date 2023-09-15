@@ -38,26 +38,7 @@ class Application
 
   public function setLayout(): void
   {
-    $userSession = $this->session->get('user') ?? false;
-    if ($userSession) {
-      switch ($userSession['type']) {
-        case User::STATUS_VALIDE:
-          $this->layout = "auth";
-          break;
-        case User::STATUS_INVALIDE:
-          $this->layout = 'auth';
-          break;
-        case User::STATUS_ADMIN:
-          $this->layout = 'auth';
-          break;
-
-        default:
-          $this->layout = 'main';
-          break;
-      }
-    } else {
-      $this->layout = 'main';
-    }
+    $this->layout = 'main';
   }
 
   public function getController(): Controller|null

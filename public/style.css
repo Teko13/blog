@@ -1,6 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
-
+@keyframes flash_message_animation {
+    0% {
+        margin-left: 100%;
+    }
+    25% {
+        margin-left: 10%;
+        animation-timing-function: linear;
+    }
+    50% {
+        margin-left: 0;
+        animation-timing-function: linear;
+    }
+    75% {
+        margin-left: -10%;
+        animation-timing-function: linear;
+    }
+    100% {
+        margin-left: -100%;
+    }
+}
+@keyframes flash_message_container {
+    100% {
+        display: none;
+    }
+}
 
 * {
     margin: 0;
@@ -10,6 +34,23 @@
     outline: 0;
     list-style: none;
     text-decoration: none;
+}
+
+.alert-flash {
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    background: rgb(2, 248, 2);
+    display: flex;
+    align-items: column;
+    justify-content: center;
+    padding: .2rem 0;
+    overflow: hidden;
+    animation: flash_message_container 8300ms both;
+}
+.alert-flash-content {
+    color: var(--color-bg);
+    animation: flash_message_animation 8s both;
 }
 
 :root {
@@ -29,6 +70,9 @@
 .msg {
     font-size: .8rem;
     font-style: italic;
+}
+.invisible {
+    display: none!important;
 }
 .succes {
     color: green;
@@ -162,8 +206,9 @@ header.head-container {
 }
 
 .nav__list {
+    position: relative;
     display: flex;
-    align-items: center;
+    align-items:center;
     gap: 1.5rem;
 }
 
@@ -175,7 +220,6 @@ header.head-container {
     color: white;
 }
 .user-blaz {
-    margin-left: 1rem;
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -201,15 +245,36 @@ header.head-container {
     font-size: 1.5rem;
     display: none;
 }
+.menu-icons {
+    display: none;
+}
 
 
 /*==================MEDIA QUERIES (SMALL DEVICE)*/
 @media screen and (max-width: 600px) {
-    .head-text {
+    nav {
+        position: relative;
+    }
+    .user-blaz {
+        margin-top: 3px;
+    }
+    .nav__list {
+        position: absolute;
+        right: 0;
+        top: 3.5rem;
+        background: var(--color-bg-variant);
+        flex-direction: column;
+        display: none;
+        z-index: 9;
+    }
+    .menu-icons {
+        display: block;
+    }
+    .menu-icons .deployed {
         display: none;
     }
-    .head-icon {
-        display: inline;
+    .menu-icons i {
+        font-size: 1.5rem;
     }
 }
 
@@ -627,7 +692,7 @@ section.auth {
 }
 
 section.auth div {
-    width: 30%;
+    width: 33vw;
     display: flex;
     flex-direction: column; 
     align-items: center;
@@ -647,6 +712,12 @@ section.auth input {
 .errors {
     font-size: .8rem;
     color: red;
+}
+/*==================MEDIA QUERIES (SMALL DEVICE)*/
+@media screen and (max-width: 600px) {
+    section.auth div {
+        width: 70vw;
+    }
 }
 
 /*==================posts list section stye ====================*/
@@ -740,3 +811,212 @@ section.auth input {
     background: transparent;
 }
 
+/*==================admin part stye ====================*/
+
+.admin-profil-blaz {
+    font-size: 5rem;
+    border-radius: 19rem;
+    padding: 2rem;
+    width: 12.5rem;
+    text-align: center;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+}
+.admin-dashboard-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+}
+.status-infos-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.status-infos-container h3 {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+.status-infos {
+    display: flex;
+    align-items: center;
+    padding: .1rem 1rem;
+    border: 1px green solid;
+    gap: .5rem;
+    border-radius: 1rem;
+}
+.publication-infos-container {
+    margin-top: 4rem;
+    display: flex;
+    gap: 3rem;
+}
+.posts-published {
+    position: relative;
+    width: 25rem;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    overflow: hidden;
+}
+
+.posts-published::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 1rem solid transparent;
+    border-bottom: 1rem solid var(--color-bg);
+}
+.publishing-number {
+    font-weight: 600;
+    font-size: 5rem;
+    margin-left: 2rem;
+}
+.publishing-title {
+    margin-left: 1rem;
+    font-weight: 200;
+    font-size: 1.5rem;
+}
+.post-creation-form {
+    margin-top: 5rem;
+}
+.actions, .actions a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+a.warning: hover{
+    background: #800020;
+    color: var(--color-light);
+}
+.validation-groupe {
+    align-self: initial;
+    position: relative;
+}
+.validation-libelle {
+    display: flex;
+    gap: .5rem;
+    cursor: pointer;
+    align-items: center;
+}
+.validation-groupe-items {
+    visibility: hidden;
+    transform: scaleY(0);
+    position: absolute;
+    transition: all 500ms ease;
+    transform-origin: top;
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+}
+.validation-groupe-items.visible {
+    visibility: visible;
+    transform: scaleY(1);
+}
+#validation-menu-arrow {
+    transition: all 500ms ease;
+}
+#validation-menu-arrow.up {
+    transform: rotate(180deg);
+}
+.users {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.users .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--color-primary);
+    border-radius: 1rem;
+    padding: 1rem;
+    transition: all 500ms ease;
+}
+.users .user:hover {
+    background: var(--color-bg-variant);
+}
+.user .user-infos {
+    display: flex;
+    flex-direction: column;
+}
+.user .user-infos h2 {
+    margin-bottom: 0;
+}
+.search-enginne {
+    width: 50%;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search-enginne span {
+    font-size: 2rem;
+}
+.search-enginne input {
+    border-radius: 1.5rem;
+}
+.comment-bloc {
+    border: 1px solid var(--color-primary);
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: all 400ms ease;
+}
+.comment-bloc:hover {
+    background: var(--color-bg-variant);
+}
+.comment-validation-view {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/*==================MEDIA QUERIES (MEDIUM DEVICE)*/
+@media screen and (max-width: 1024px) {
+    .publication-infos-container {
+        flex-direction: column;
+    }
+    .admin-dashboard-container h1 {
+        text-align: center;
+    }
+    .posts-published {
+        width: 15rem;
+    }
+    .publishing-number {
+        font-size: 3rem;
+    }
+}
+/*==================MEDIA QUERIES (SMALL DEVICE)*/
+@media screen and (max-width: 600px) {
+    .post-container .actions {
+        flex-direction: column;
+    }
+    .post-container .actions .btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .users .user, .actions {
+        flex-direction: column;
+    }
+    .users .user {
+        gap: 1rem;
+    }
+    .actions, .actions .btn {
+        width: 100%;
+    }
+    .comment-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+    .comment-actions .btn {
+        width: 100%;
+    }
+    
+}

@@ -16,7 +16,7 @@ class m0002_posts
             content TEXT NOT NULL,
             id_author INT NOT NULL,
             PRIMARY KEY (id),
-            CONSTRAINT fk_post_author FOREIGN KEY (id_author) REFERENCES user(id)
+            CONSTRAINT fk_post_author FOREIGN KEY (id_author) REFERENCES user(id) ON DELETE CASCADE
           );
           INSERT INTO post (title, chapo, content, id_author) VALUES (
           'Présentation', 'Bienvenu sur mon blog', 'Je suis un développeur passionné,

@@ -22,6 +22,13 @@ class PostsController extends Controller
 
         $post = $this->post;
         $allPosts = $post->findAll();
+        // sort array to have the most recent posts first
+        usort($allPosts, function ($a, $b) {
+            if ($a->updated_at === $b->updated_at) {
+                return 0;
+            }
+            return $a->updated_at > $b->updated_at ? -1 : 1;
+        });
         return $this->render('posts', ["posts" => $allPosts]);
     }
     public function post()
@@ -33,6 +40,10 @@ class PostsController extends Controller
         $postId = $requestBody["id"];
         $onePost = $this->post->findOnePost($postId);
         $comments = $this->comment->findPostComments($postId);
+        // filter non-valide comment
+        $comments = array_filter($comments, function ($comment) {
+            return $comment["status"] === "valide";
+        });
         $details = ["post" => $onePost[0], "comments" => $comments];
         return $this->render('post', ["post" => $details]);
     }
@@ -43,12 +54,16 @@ class PostsController extends Controller
         $comment = $this->comment;
         $comment->loadData($body);
         if ($comment->validate() && $comment->save()) {
-            $post = $this->post->findOnePost($body['id_post']);
-            $postTitle = $post[0]['title'];
-            $author = Application::$app->session->get("user")["firstName"] . ' ' . Application::$app->session->get("user")["lastName"];
-            $mailData = [$author, $postTitle, $comment->content];
-            Application::$app->mailer->sendCommentValidationrequest($mailData);
-            Application::$app->session->setFlash("succes", "Votre commentaire a été bien soumis et sera publier après validation");
+            try {
+                $post = $this->post->findOnePost($body['id_post']);
+                $postTitle = $post[0]['title'];
+                $author = Application::$app->session->get("user")["firstName"] . ' ' . Application::$app->session->get("user")["lastName"];
+                $mailData = [$author, $postTitle, $comment->content];
+                Application::$app->mailer->sendCommentValidationrequest($mailData);
+            } catch (\Throwable $th) {
+                //nothing
+            }
+            Application::$app->session->setFlash("success", "Votre commentaire a été bien soumis et sera publier après validation");
         }
         Application::$app->session->setFlash("error", $comment->errors);
         Application::$app->response->redirect("/post?id=" . $body['id_post'] . '#comment');

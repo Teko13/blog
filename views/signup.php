@@ -1,6 +1,6 @@
-<section class="auth">
-    <div class="container">
-        <h1>Inscription</h1>
+<section class="auth container">
+    <div>
+        <h2>Inscription</h2>
         <?php if (isset($model)) { ?>
             <ul class='errors'>
                 <?php
