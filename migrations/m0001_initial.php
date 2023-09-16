@@ -7,7 +7,14 @@ class m0001_initial
     public function up(): void
     {
         $db = Application::$app->db;
-        $adminPW = password_hash("Gtektr91", PASSWORD_DEFAULT);
+        $adminPW = "";
+        while ($adminPW === "") {
+            echo "Veuillez choisir un mot de passe pour l'admin: ";
+            $adminPW = trim(fgets(STDIN));
+        }
+        echo "Vous utiliserez l'email 'admin@gmail.com' et le mot de passe que vous venez de créé pour vous connecter en tant qu'administrateur. (Entrée pour continuer) ";
+        fgets(STDIN);
+        $adminPW = password_hash($adminPW, PASSWORD_DEFAULT);
         $sql = "CREATE TABLE user (
             id INT NOT NULL AUTO_INCREMENT,
             firstName VARCHAR(255) NOT NULL,

@@ -19,7 +19,6 @@ $config = [
         'password' => $_ENV['MAIL_SERVER_PASSWORD']
     ]
 ];
-
 $app = new Application(__DIR__, $config);
 
 $app->db->applyMigrations();

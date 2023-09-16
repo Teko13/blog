@@ -54,13 +54,6 @@ use App\src\Application;
 
     <footer id='footer'>
         <a href="#" class="footer__logo">Teko</a>
-        <ul class="permalinks">
-            <li><a href="#about">A propos de moi</a></li>
-            <li><a href="#competences">Mes competences</a></li>
-            <li><a href="#skills">Mes savoir-faire</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Mes coordonnées</a></li>
-        </ul>
         <div class="footer__socials">
             <a href="https://www.facebook.com/Parlons-Techs-104050835687569/" target='_blank'>
                 <i class="fa-brands fa-facebook-f"></i>
