@@ -2,7 +2,7 @@
     <div class="container">
         <h1>401</h1>
         <p>
-            Accè non autorisé
+            Non autorisé
         </p>
     </div>
 </section>

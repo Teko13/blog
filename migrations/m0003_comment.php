@@ -16,7 +16,7 @@ class m0003_comment
             id_author INT NOT NULL,
             PRIMARY KEY (id),
             FOREIGN KEY (id_post) REFERENCES post(id) ON DELETE CASCADE,
-            FOREIGN KEY (id_author) REFERENCES user(id)
+            FOREIGN KEY (id_author) REFERENCES user(id) ON DELETE CASCADE
           );";
         $db->pdo->exec($sql);
     }

@@ -11,6 +11,7 @@ class Mailer
     public PHPMailer $mailer;
     private const NEW_USER_MAIL_TEMPLATE = 'new_user_validation_mail_temp';
     private const NEW_COMMENT_MAIL_TEMPLATE = 'new_comment_validation_mail_temp';
+    private const NEW_CONTACT_MESSAGE_TEMPLATE = 'new_contact_message_temp';
 
     public function __construct(array $mailerConfig)
     {
@@ -67,6 +68,16 @@ class Mailer
         return $this->mailer->send();
     }
 
+    public function sendContactMessage(array $contact): bool
+    {
+        $template = self::getcontacttemplate();
+        $templatefield = array("{{name}}", "{{email}}", "{{message}}");
+        $this->mailer->Subject = 'NOUVEAU MESSAGE 📩';
+        $email = str_replace($templatefield, $contact, $template);
+        $this->mailer->Body = $email;
+        return $this->mailer->send();
+    }
+
     private function getusermailtemplate(): string
     {
         ob_start();
@@ -77,6 +88,12 @@ class Mailer
     {
         ob_start();
         include_once Application::$ROOT_DIR . "/views/templates/" . self::NEW_COMMENT_MAIL_TEMPLATE . ".php";
+        return ob_get_clean();
+    }
+    private function getcontacttemplate(): string
+    {
+        ob_start();
+        include_once Application::$ROOT_DIR . "/views/templates/" . self::NEW_CONTACT_MESSAGE_TEMPLATE . ".php";
         return ob_get_clean();
     }
 }

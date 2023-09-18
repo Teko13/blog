@@ -37,8 +37,12 @@ class AuthController extends Controller
         if ($request->isPostMethod()) {
             $user->loadData($request->getBody());
             if ($user->validate() && $user->register()) {
-                Application::$app->mailer->sendvalidationrequest([$user->firstName, $user->lastName, $user->email]);
-                Application::$app->session->setFlash("success", "Merci pour l'inscription");
+                try {
+                    Application::$app->mailer->sendvalidationrequest([$user->firstName, $user->lastName, $user->email]);
+                } catch (\Throwable $th) {
+                    //nothing;
+                }
+                Application::$app->session->setFlash("success", "Vous avez bien é(é inscrit, vous pouvez maintenant vous connecter");
                 Application::$app->response->redirect('/login');
             }
             return $this->render("signup", [

@@ -18,7 +18,15 @@ class Post extends DBModel
     }
     public function rules(): array
     {
-        return [];
+        return [
+            'content' => [self::RULE_REQUIRED],
+            'title' => [self::RULE_REQUIRED],
+            'chapo' => [self::RULE_REQUIRED],
+        ];
+    }
+    public function attributes()
+    {
+        return ["title", "chapo", "content", "id_author"];
     }
 
     public function findOnePost($idPost)

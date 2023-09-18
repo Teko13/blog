@@ -1,0 +1,8 @@
+# DB_DNS = "mysql:host=xxxx;port=xxxx;dbname=mon_blog;charset=utf8"
+# DB_USER = "xxxx"
+# DB_PASSWORD ="xxxx"
+# MAIL_SERVER_HOST = "xxx://smtp.xxx.xxxx:000"
+# MAIL_SERVER_PORT = "0000"
+# MAIL_SERVER_USERNAME = "xxxx@xxxx.xxxx"
+# MAIL_SEND_FROM = "xxxx@xxxx.xxxx"
+# MAIL_SERVER_PASSWORD = "xxxx"

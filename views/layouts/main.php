@@ -1,4 +1,5 @@
 <?php
+use App\models\User;
 use App\src\Application;
 
 ?>
@@ -16,29 +17,36 @@ use App\src\Application;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Mon Blog</title>
 </head>
 
 <body>
     <header class='container head-container'>
         <nav class='head__nav'>
-            <a href="#">
+            <a href="/">
                 <h2>Teko</h2>
             </a>
-            <div class="nav__links">
-                <ul class="nav__list">
-                    <li><a href="/"><span class='head-text'>Accueil</span></a></li>
-                    <li><a href="/posts"><span class='head-text'>Posts</span></a></li>
-                    <li><a href="/login"><span class="head-text">Connexion</span></a></li>
-                    <li><a href="/signup"><span class="head-text">S'inscrir</span></a></li>
-                </ul>
-            </div>
+            <?php
+            $path = Application::$app->request->getPath();
+            if (isset(Application::$app->session->get("user")["type"])) {
+                if ((strpos($path, "/admin/") === 0) && (Application::$app->session->get("user")["type"] === User::STATUS_ADMIN)) {
+                    include Application::$ROOT_DIR . "/views/layouts/admin-navbar.php";
+                } else {
+                    include Application::$ROOT_DIR . "/views/layouts/logged-navbar.php";
+                }
+            } else {
+                include Application::$ROOT_DIR . "/views/layouts/no-logged-navbar.php";
+            }
+            ?>
         </nav>
     </header>
     <?php if (Application::$app->session->getFlash("success")) { ?>
-        <div style="margin-top:34px;" class="alert-sucess">
-            <?= Application::$app->session->getFlash('success'); ?>
+        <div class="alert-flash">
+            <div class="alert-flash-content">
+                <?= Application::$app->session->getFlash('success'); ?>
+            </div>
         </div>
     <?php } ?>
 
@@ -46,26 +54,19 @@ use App\src\Application;
 
     <footer id='footer'>
         <a href="#" class="footer__logo">Teko</a>
-        <ul class="permalinks">
-            <li><a href="#about">A propos de moi</a></li>
-            <li><a href="#competences">Mes competences</a></li>
-            <li><a href="#skills">Mes savoir-faire</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Mes coordonnées</a></li>
-        </ul>
         <div class="footer__socials">
             <a href="https://www.facebook.com/Parlons-Techs-104050835687569/" target='_blank'>
-                <FaFacebookF />
+                <i class="fa-brands fa-facebook-f"></i>
             </a>
             <a href="https://www.instagram.com/tekofabricefolly/" target='_blank'>
-                <FiInstagram />
+                <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://twitter.com/TekoFabriceF" target='_blank'>
-                <IoLogoTwitter />
+                <i class="fa-brands fa-twitter"></i>
             </a>
         </div>
     </footer>
+    <script src="/navbar.js"></script>
 </body>
-
 
 </html>

@@ -30,7 +30,7 @@ class User extends DBModel
     {
         return "user";
     }
-    public function attributes()
+    public function attributes(): array
     {
         return ["firstName", "lastName", "email", "password", "type"];
     }

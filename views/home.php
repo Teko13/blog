@@ -7,8 +7,12 @@
         <h1>Teko Fabrice</h1>
         <h5 class="text-light">Developpeur Full Stack</h5>
         <div class='header__socials'>
-            <a href="https://www.linkedin.com/in/teko-fabrice-folly-708a28233" target='_blank'>Ln</a>
-            <a href="https://github.com/Teko13" target='_blank'>Gi</a>
+            <a href="https://www.linkedin.com/in/teko-fabrice-folly-708a28233" target='_blank'>
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/Teko13" target='_blank'>
+                <i class="fa-brands fa-github"></i>
+            </a>
         </div>
         <div class='cta'>
             <a href="./assets/cv.pdf" download class='btn btn-primary'>Télécharger mon CV</a>
@@ -118,19 +122,19 @@
     <div class="container contact__container">
         <div class="contact__options">
             <article class="contact__option">
-                <MdOutlineEmail class='contact__option-icon' />
+                <i class="fa-solid fa-square-envelope contact__option-icon"></i>
                 <h4>Email</h4>
                 <h5>tekofabricefolly@gmail.com</h5>
                 <a href="mailto:tekofabricefolly@gmail.com" target='_blank'>M'envoyer un mail</a>
             </article>
             <article class="contact__option">
-                <FaTelegramPlane class='contact__option-icon' />
+                <i class="fa-brands fa-telegram contact__option-icon"></i>
                 <h4>Telegram</h4>
                 <h5>@teko_fabrice</h5>
                 <a href="https://t.me/teko_fabrice" target='_blank'>M'envoyer un message</a>
             </article>
             <article class="contact__option">
-                <BsWhatsapp class='contact__option-icon' />
+                <i class="fa-brands fa-whatsapp contact__option-icon"></i>
                 <h4>Whatsapp</h4>
                 <h5>+33 6 18 14 57 85</h5>
                 <a href="https://wa.me/+33618145785" target='_blank'>M'envoyer un message</a>
