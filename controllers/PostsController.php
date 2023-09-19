@@ -23,7 +23,7 @@ class PostsController extends Controller
         $post = $this->post;
         $allPosts = $post->findAll();
         // sort array to have the most recent posts first
-        usort($allPosts, function ($a, $b) {
+        usort($allPosts, function (Post $a, Post $b) {
             if ($a->updated_at === $b->updated_at) {
                 return 0;
             }

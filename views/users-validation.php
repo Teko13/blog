@@ -58,3 +58,4 @@ use App\src\Application;
         <?php } ?>
     </article>
 </section>
+<script src="/users-search.js"></script>
