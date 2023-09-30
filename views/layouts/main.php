@@ -31,7 +31,7 @@ use App\src\Application;
             <?php
             $path = Application::$app->request->getPath();
             if (isset(Application::$app->session->get("user")["type"])) {
-                if ((strpos($path, "/admin/") === 0) && (Application::$app->session->get("user")["type"] === User::STATUS_ADMIN)) {
+                if ((strpos($path, "/admin/") === 0) && (Application::$app->session->get("user")["type"] >= User::STATUS_VALIDE)) {
                     include Application::$ROOT_DIR . "/views/layouts/admin-navbar.php";
                 } else {
                     include Application::$ROOT_DIR . "/views/layouts/logged-navbar.php";

@@ -5,7 +5,7 @@ $userSession = Application::$app->session->get('user');
 ?>
 <div class="nav__links">
     <ul class="nav__list">
-        <li><a href="/admin"><span class='head-text'>Tableau de bord</span></a></li>
+        <li><a href="/admin/"><span class='head-text'>Tableau de bord</span></a></li>
         <li><a href="/admin/create-post"><span class="head-text">Créer un post</span></a></li>
         <li><a href="/admin/manage-post"><span class="head-text">Gerer posts</span></a></li>
         <?php if (Application::$app->session->get("user")["type"] === 2) { ?>

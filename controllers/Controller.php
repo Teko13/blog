@@ -7,7 +7,6 @@ use App\src\Application;
 class Controller
 {
 
-    public string $layout;
 
 
     public function render($view, $params)
